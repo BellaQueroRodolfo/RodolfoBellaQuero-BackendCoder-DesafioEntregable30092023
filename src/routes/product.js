@@ -26,4 +26,27 @@ router.get('/:pid', async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const { title, description, code, price, stock, thumbnails } = req.body;
+    if (!title || !description || !code || !price || !stock || !thumbnails) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const newPlantProduct = {
+      title,
+      description,
+      code,
+      price,
+      stock,
+      thumbnails,
+    };
+
+    const plantProduct = await productManager.addPlantProduct(newPlantProduct);
+    res.status(201).json({ plantProduct });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;
