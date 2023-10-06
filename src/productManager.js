@@ -6,13 +6,11 @@ class ProductManager {
     this.cartsFilePath = cartsFilePath;
   }
 
-  // Add methods to manage products and carts
   async getPlantProducts() {
     try {
-      const productsData = await fs.readFile(this.productsFilePath, 'utf-8');
-      const products = JSON.parse(productsData);
-      // Implement logic to filter plant products
-      return products.filter((product) => product.category === 'Plant');
+      const data = await fs.readFile(this.productsFilePath, 'utf8');
+      const products = JSON.parse(data);
+      return products.slice(0, 4);
     } catch (error) {
       throw error;
     }
@@ -20,31 +18,10 @@ class ProductManager {
 
   async getPlantProductById(productId) {
     try {
-      const productsData = await fs.readFile(this.productsFilePath, 'utf-8');
-      const products = JSON.parse(productsData);
-      const product = products.find((p) => p.id === parseInt(productId));
-      return product;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getAllCarts() {
-    try {
-      const cartsData = await fs.readFile(this.cartsFilePath, 'utf-8');
-      const carts = JSON.parse(cartsData);
-      return carts;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getCartById(cartId) {
-    try {
-      const cartsData = await fs.readFile(this.cartsFilePath, 'utf-8');
-      const carts = JSON.parse(cartsData);
-      const cart = carts.find((c) => c.id === cartId);
-      return cart;
+      const data = await fs.readFile(this.productsFilePath, 'utf8');
+      const products = JSON.parse(data);
+      const plantProduct = products.find((product) => product.id === parseInt(productId));
+      return plantProduct;
     } catch (error) {
       throw error;
     }
