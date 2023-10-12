@@ -5,23 +5,18 @@ const socketIo = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-
 const port = 8080;
 
 app.use(express.json());
 
-const productsRouter = require('./routes/products');
-const cartsRouter = require('./routes/carts');
+const productsRouter = require('./routes/product');
+const cartsRouter = require('./routes/cart');
 
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars');
-
-// Serve static files
 app.use(express.static('public'));
-
 app.use('/products', productsRouter);
 app.use('/carts', cartsRouter);
-
 app.get('/real-time-products', (req, res) => {
   res.render('realTimeProducts');
 });
