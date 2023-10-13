@@ -1,5 +1,5 @@
 {{#extends 'layouts/main'}}
-{{#section 'content'}}
+{{#content 'body'}}
     <h1>Real-Time Plant Products</h1>
     <form id="productForm">
         <input type="text" id="productName" placeholder="Product Name">
@@ -8,6 +8,7 @@
     </form>
     <ul id="productList">
     </ul>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js"></script>
-{{/section}}
+{{/content}}
