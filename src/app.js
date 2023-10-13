@@ -18,7 +18,7 @@ app.use(express.static('public'));
 app.use('/products', productsRouter);
 app.use('/carts', cartsRouter);
 app.get('/real-time-products', (req, res) => {
-  res.render('realTimeProducts');
+  res.render('realTimeProducts', { layout: 'main' });
 });
 
 io.on('connection', (socket) => {
